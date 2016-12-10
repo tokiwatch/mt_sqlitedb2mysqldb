@@ -8,19 +8,18 @@ require 'sequel'
 
 #Setup configration section for mt's db migration
 from_db_type = 'sqlite'
-from_db_name = 'sqlite_db_filename'
-
+from_db_name = '/Users/tokiwatch/Sites/aras/cgi-bin/db/mt.db'
 to_db_type = 'mysql'
-username = 'username'
-password = 'password'
+username = 'root'
+password = '734t922t'
 to_db_server = 'localhost'
-to_db_name = 'databasename'
+to_db_name = 'aras_mt'
 
 #convert asset file uploaded path.
-current_html_path = '/home/www'
+current_html_path = '/var/www'
 new_html_path = '/var/www'
 
-my_sleep_weight = 0.01
+my_sleep_weight = 0.001
 #generate db object
 DB  = Sequel.connect("#{from_db_type}://#{from_db_name}")
 DB2 = Sequel.connect("#{to_db_type}://#{username}:#{password}@#{to_db_server}/#{to_db_name}")
@@ -28,8 +27,8 @@ DB2 = Sequel.connect("#{to_db_type}://#{username}:#{password}@#{to_db_server}/#{
 tables = DB.tables
 
 # mt_session table is never migration.
-tables.delete(:mt_session)
-tables.delete(:mt_log)
+# tables.delete(:mt_session)
+# tables.delete(:mt_log)
 
 tables.each do |table_name|
     p table_name
